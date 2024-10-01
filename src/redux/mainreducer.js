@@ -9,6 +9,7 @@ import Subject from './reducer/subject/subject';
 // import Theme from './reducer/theme/theme'
 import Themereducer from './reducer/theme/theme';
 import UpdateState from './reducer/state/state';
+import FETCHPOS from './reducer/pos/pos';
 
 
 export const rootreducer = combineReducers({
@@ -20,6 +21,7 @@ export const rootreducer = combineReducers({
     Showclasses: Showclasses,
     Subject: Subject,
     theme: Themereducer,
-    UpdateState:UpdateState
+    UpdateState:UpdateState,
+    FETCHPOS: FETCHPOS
   });
   

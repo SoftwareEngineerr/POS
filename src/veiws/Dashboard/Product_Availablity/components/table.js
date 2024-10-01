@@ -15,13 +15,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostRequest } from '../../../../redux/actions/PostRequest';
 import Editmodal from './editmodal';
 import { ShowLoader } from '../../../../redux/actions/loader';
+import PaginationTable from '../../../../components/table/paginationTable';
 // import { Button } from 'bootstrap';
 
 
 const CustomTable = (props) => {
-  const theme = useTheme();
-  const style = theme.palette;
-  const tablestyle = theme.palette.Main.Inventory;
+
   const url = useSelector((state) => state.Api);
   const [number , setNumber ] = useState(0);
   const dispatch = useDispatch();
@@ -30,6 +29,8 @@ const CustomTable = (props) => {
   const [open, setOpen] = useState(false);
   const [editOpen , setEditOpen ] = useState(false)
   const [ data , setData ] = useState(''); 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   
   const myfunc = () => {
     setOpen(!open)
@@ -38,38 +39,15 @@ const CustomTable = (props) => {
     myfunc();
     setNumber((number)=>number+1)
   }
+
   // console.log(style.sidemenutext.secondary)
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [sendingEditData , setSendingEditData ] = useState();
-
-
-  console.log(props.data)
-
-
-
-
-
-
-            // pagination started
-        const handleChangePage = (
-            event: React.MouseEvent<HTMLButtonElement> | null,
-            newPage: number,
-        ) => {
-            // alert(newPage)
-            setPage(newPage);
-        };
-
-        const handleChangeRowsPerPage = (
-            event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        ) => {
-            setRowsPerPage(parseInt(event.target.value, 10));
-            // alert(parseInt(event.target.value, 10))
-            setPage(0);
-        };
-
         // pagination ended
+
+        const rowsfunc = (e) => {
+            setPage(0);
+            setRowsPerPage(e)
+        }
 
 
         useEffect(()=>{
@@ -96,11 +74,11 @@ const CustomTable = (props) => {
                   // Store the fetched data in sessionStorage
                   sessionStorage.setItem("Classes", JSON.stringify(res.data.result));
                 dispatch(ShowLoader('0'))
-                setPage(0)
+                // setPage(0)
                 }
             };
             myfunc();
-          }, [page , rowsPerPage , number , props.data])
+          }, [props.data , number , page , rowsPerPage])
 
           const editOpenClose = () => {
             setEditOpen(false)
@@ -156,94 +134,16 @@ const CustomTable = (props) => {
 
                  {/* add product modal ended  */}
 
-
-            <Box>
-                <Typography variant='h2'>
-                    Result : {data.result}
-                </Typography>
-            </Box>
-            <br />
-        <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 515 }} aria-label="caption table">
-            <TableHead>
-            <TableRow  sx={{background: style.primary.main}} id="thead">
-                {
-                    ['Image','Name', 'Expiry' , 'Bar Code','Quantity','Real Price','Sell Price'].map((item, ind)=>
-                    <TableCell key={ind} sx={{color:style.sidemenutext.color}}>
-                        {item}
-                    </TableCell>
-
-                    )
-                }
-                    
-            </TableRow>
-            </TableHead>
-            <TableBody>
-                <TableRow >
-                    <TableCell colSpan={8} onClick={myfunc}>
-                        <Box sx={tablestyle.table.firstrow}>
-                            <Box><Add /></Box>
-                                <Box sx={{margin: '3px'}}>
-                                    Add Product
-                                </Box>
-                        </Box>
-                    </TableCell>
-                </TableRow>
-
-                {
-                  data && ( data.data.map((item , ind)=>
-                        <TableRow>
-                            <TableCell>
-                                {
-                                    item.image && item.image != 'undefined' && (
-                                        <Box component="img" src={`${url.imageServer}/${item.image}`} sx={tablestyle.imagestyle} >
-                                        </Box>
-                                    )
-                                }
-                                {/* <img src={`${url.imageServer}/${item.Image}`} sx={tablestyle.imagestyle} /> */}
-                                {/* {item.Image} */}
-                            </TableCell>
-                            <TableCell>
-                                {item.Name}
-                            </TableCell>
-                            <TableCell>
-                                {item.Expiry}
-                            </TableCell> 
-                            <TableCell>
-                                {item.BarCode}
-                            </TableCell> 
-                            <TableCell>
-                                {item.Quantity}
-                            </TableCell> 
-                            <TableCell>
-                                {item.Real_Price}
-                            </TableCell> 
-                            <TableCell>
-                                {item.Sell_Price}
-                            </TableCell> 
-                            {/* <TableCell>
-                                <Edit onClick={()=>EditItem(item)} />
-                                <Delete onClick={()=>DeleteItem(item.id)} />
-                            </TableCell> */}
-                        </TableRow>
-                    )
-                )
-                }
-
-
-            </TableBody>
-        </Table>
-        </TableContainer>
-        <Box>
-        <TablePagination
-            component="div"
-            count={data.result}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-        </Box>
+                <PaginationTable 
+                 data={data} 
+                 title={['Image','Name', 'Expiry' , 'Bar Code','Quantity','Real Price','Sell Price']}
+                fetchData={['Name','Expiry','BarCode','Quantity','Real_Price','Sell_Price']}
+                myfunc={myfunc}
+                image='true'
+                page={(e)=>setPage(e)}
+                rowsPerPage={(e)=>rowsfunc(e)}
+                butnName='Add Product'
+                /> 
     </>
   );
 }

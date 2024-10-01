@@ -68,5 +68,55 @@ export const Components = {
                 height:'150px'
             
         }
+    },
+    dashboard:{
+        box:{
+            
+            backgroundImage: 'url(/images/mountains/flower.png)',
+            position: 'relative',
+
+
+
+            // '&:before': {
+            //     content: '""',
+            //     background: 'white',
+            //     position: 'absolute',
+            //     zIndex: '1',
+            //     width: '100%',
+            //     height: '100%',
+
+            //    },
+            underbox:{
+                minHeight: '150px',
+                background: '#d5d5ff',
+                display: 'flex',
+                alignItems: 'flex-start',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: '24px',
+                borderRadius: '22px',
+                boxShadow: '0 0.25rem 2.5rem #0000001a',
+                position: 'relative',
+                zIndex: '2',
+                background: '#a9a9ff87',
+            }
+        },
+        icon:{
+            width: '75px',
+            position: 'relative',
+            zIndex: '2',
+            height: '75px',
+            background: 'white',
+            borderRadius: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            boxShadow: '0 0.25rem 2.5rem #0000001a',
+
+            icon:{
+                fontSize: '35px'
+            }
+        }
+
     }
 }

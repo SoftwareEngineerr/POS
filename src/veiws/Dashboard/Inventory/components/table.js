@@ -45,7 +45,7 @@ const CustomTable = (props) => {
   const [sendingEditData , setSendingEditData ] = useState();
 
 
-  console.log(props.data)
+//   console.log(props.data)
 
 
 
@@ -71,7 +71,7 @@ const CustomTable = (props) => {
 
         // pagination ended
 
-
+        debugger
         useEffect(()=>{
             // console.log('is it changing');
             const myfunc = async()=>{
@@ -96,7 +96,7 @@ const CustomTable = (props) => {
                   // Store the fetched data in sessionStorage
                   sessionStorage.setItem("Classes", JSON.stringify(res.data.result));
                 dispatch(ShowLoader('0'))
-                setPage(0)
+                // setPage(0)
                 }
             };
             myfunc();

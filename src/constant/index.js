@@ -491,6 +491,17 @@ export const Main = ()=> {
             {data: 'Real Price', type: 'number', required: true,  style:'max-width: 800px', name: 'real_Price', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'en'},
             
         ],
-    }  
+    },
+    ProductHistory:{
+            inputs:[
+                {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'startDate', feildtype:'date', lg: 6 , md: 4, sm: 6, xs: 12, lang:'en'},
+                {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'endDate', feildtype:'date', lg: 6 , md: 4, sm: 6, xs: 12, lang:'en'},
+                {data: 'Show Records', type: 'text', required: true, name: 'Roll', feildtype:'button', lg: 12 , md: 12, sm: 12, xs: 12, lang: 'en'},
+
+            ],
+            title:'Income',
+            description: 'Income'
+        
+    }
     }
 };

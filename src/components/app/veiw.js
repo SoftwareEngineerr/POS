@@ -4,7 +4,6 @@ import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogConten
 import { useDispatch, useSelector } from 'react-redux'
 import { useTheme } from '@emotion/react'
 import { CustomBtn } from '../button/button'
-import { PostRequest } from '../../redux/actions/PostRequest'
 import StudentUpdateinfo from './StudentUpdateinfo'
 
 const AppStudentReportComponent = (props) => {

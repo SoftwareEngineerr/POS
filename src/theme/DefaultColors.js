@@ -27,7 +27,7 @@ export const Themefunc = () => {
       },
       primary: {
         main: themedata.menucolor == '#47a54b' ? '#47a54b' : themedata.menucolor,
-        light: '#47a54b61',
+        light: '#ace9f4',
         dark: '#27662a',
         // main: '#ffaf00',
         // light: '#ffaf0036',

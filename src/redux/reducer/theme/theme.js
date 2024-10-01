@@ -1,6 +1,6 @@
 const initialState = {
     data:'white',
-    menucolor: '#47a54b',
+    menucolor: '#000000',
     display: 'block'
 };
 

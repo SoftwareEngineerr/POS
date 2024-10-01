@@ -13,6 +13,8 @@ export default function CustomTable(props) {
   const theme = useTheme();
   const style = theme.palette;
   // console.log(style.sidemenutext.secondary)
+  // const color = style.primary.main == '#000000' ? 'white' : 'black';
+  // console.log(color)
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 515 }} aria-label="caption table">
@@ -20,7 +22,7 @@ export default function CustomTable(props) {
           <TableRow  sx={{background: style.primary.main}} id="thead">
             {props.data &&
               Object.keys(props.data[0]).map((key) => (
-                <TableCell key={key} sx={{color:style.sidemenutext.color}}>{key}</TableCell>
+                <TableCell key={key} sx={{color:'white'}}>{key}</TableCell>
               ))}
           </TableRow>
         </TableHead>

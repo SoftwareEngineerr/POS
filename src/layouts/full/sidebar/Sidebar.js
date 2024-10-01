@@ -15,7 +15,7 @@ const Sidebar = (props) => {
     return (
       <Box
         sx={{
-          width: (theme)=>theme.palette.sidemenutext.width,
+          width: (theme)=>theme.palette.sidemenutext.width, 
           flexShrink: 0,
         }}
       >
@@ -53,9 +53,9 @@ const Sidebar = (props) => {
               {/* Sidebar Items */}
               {/* ------------------------------------------- */}
               <SidebarItems />
-              <Box sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>
+              {/* <Box sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>
                 <Upgrade />
-              </Box>
+              </Box> */}
             </Box>
             
           </Box>
@@ -88,7 +88,7 @@ const Sidebar = (props) => {
       {/* Sidebar For Mobile */}
       {/* ------------------------------------------- */}
       <SidebarItems />
-      <Upgrade />
+      {/* <Upgrade /> */}
     </Drawer>
   );
 };

@@ -73,6 +73,9 @@ const ShowKhataPerson = props => {
                         }}
                         >
                             <Modal
+                            khataId={props.id}
+                            open={()=>setOpen(false)}
+                            updateinfo={props.updateinfo}
                             //  myfunc={updateinfo}
                               />
                         </Box>

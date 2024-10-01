@@ -7,26 +7,33 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@emotion/react';
-import { Input } from '../../../../components/input/input';
 import { Box, Grid, Typography } from '@mui/material';
-import { CustomBtn } from '../../../../components/button/button';
 import { Delete, DeleteForever } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { POS } from '../../redux/actions/pos/pos';
+import { CustomBtn } from '../button/button';
+import { Input } from '../input/input';
+import { PostRequest } from '../../redux/actions/PostRequest';
 
 
-export default function CustomTable(props) {
+export default function CalculatorTable(props) {
   const theme = useTheme();
   const style = theme.palette;
   const [obj , setObj ] = useState();
   const [total , setTotal ] = useState();
+  const [discount , setDiscount ] = useState(0);
   const [ update , setUpdate ] = useState()
   const [ updateValue , setUpdateValue ] = useState()
-    const api = useSelector((state)=>state.Api)
+  const api = useSelector((state)=>state.Api)
+  const dispatch = useDispatch()
+  const userToken = JSON.parse(sessionStorage.getItem('User_Data'))?.token || undefined;
+
+
 
 //   console.log(props)
   const [data, setData] = useState(() => 
     props.data.map(item => {
-      const { Quantity , Sell_Price , id , ...rest } = item; // Destructure to omit Quantity
+      const { Quantity , Sell_Price , Discount , id , ...rest } = item; // Destructure to omit Quantity
       return rest; // Return the rest of the properties
     })
   );
@@ -99,7 +106,7 @@ export default function CustomTable(props) {
   
   useEffect(() => {
     setData(props.data.map(item => {
-      const { Quantity, Sell_Price ,id, Image ,  ...rest } = item; // Destructure to omit Quantity
+      const { Quantity, Sell_Price ,id, Image , ProductId ,Discount ,  ...rest } = item; // Destructure to omit Quantity
       return rest; // Return the rest of the properties
     }));
 
@@ -120,7 +127,20 @@ export default function CustomTable(props) {
             }
         }
         const { Quantity , Sell_Price  ,  ...rest } = item; // Destructure to omit Quantity
-        return {...rest , price:myfunc() , Quantity: 1}; // Return the rest of the properties
+        console.log(item , obj)
+        if(obj){
+            if(obj[ind] != undefined){
+                if(item.id == obj[ind].id){
+                    return obj[ind]
+                }
+            }
+            else{
+                return {...rest , price:myfunc() , Quantity: 1}; // Return the rest of the properties
+            }
+        }
+        else{
+            return {...rest , price:myfunc() , Quantity: 1}; // Return the rest of the properties
+        }
       }));
       totalfunc()
     }, [props.data ]);
@@ -260,9 +280,49 @@ export default function CustomTable(props) {
 
     const submitFunc = (e) => {
         e.preventDefault();
-        console.log(obj)
+        const data = obj.map((item , ind)=>{
+            return { ...item , PerPice: props.data[ind].Sell_Price}
+        })
+        console.log(data)
+        dispatch(POS(data))
+        const payload = {
+            data: data,
+            khataId: props.khataId,
+            discount: discount,
+            total: total,
+            items: data.length
+        }
+        console.log(props.khataId)
+        dispatch(PostRequest(api.create_Bill , userToken , payload))
+        props.open()
+        props.updateinfo()
     }
-
+    const minusMoney = (value, ind) => {
+        console.log(value, ind);
+        // var value = value;
+        // if(value){
+        //     value = 0;
+        // }
+        setObj((prevData) => {
+            const updatedData = prevData.map((item, index) => {
+                if (index === ind) {
+                    return { ...item, Discount: parseInt(value) }; // Update the Discount
+                }
+                return item; // Return unchanged item
+            });
+    
+            // Calculate the new total discount after updating the state
+            const newDiscount = updatedData.reduce((total, item) => {
+                return total + item.Discount; // Accumulate the Discount
+            }, 0);
+    
+            // Set the discount based on the updated data
+            setDiscount(newDiscount);
+    
+            return updatedData; // Return the updated array for setObj
+        });
+    };
+    
   return (
     <>
     <TableContainer component={Paper}>
@@ -275,6 +335,7 @@ export default function CustomTable(props) {
                 <TableCell key={key} sx={{color:style.sidemenutext.color}}>{key}</TableCell>
               ))}
                 <TableCell sx={{color:style.sidemenutext.color}}>Quantity</TableCell>
+                <TableCell sx={{color:style.sidemenutext.color}}>Discount</TableCell>
                 <TableCell sx={{color:style.sidemenutext.color}}>Per Pice</TableCell>
                 <TableCell sx={{color:style.sidemenutext.color}}>Price</TableCell>
                 <TableCell sx={{color:style.sidemenutext.color}}>Action</TableCell>
@@ -314,7 +375,7 @@ export default function CustomTable(props) {
                   <TableCell>
                     {/* {//console.log(props.data )} */}
                     <Input
-                    defaultValue={1}
+                    // defaultValue={1}
                     type="number"
                     max={row.Quantity}
                     inputProps={{ 
@@ -328,8 +389,25 @@ export default function CustomTable(props) {
                     }}
                     />
                   </TableCell>
+                  <TableCell>
+                        <Input
+                            type="number"
+                            // onChange={(e)=>handleInputChange(e ,  props.data[ind].Quantity , ind)}
+                            onChange={(e)=>minusMoney(e.target.value , ind)}
+                            defaultValue={0}
+                            value={obj?.[ind].Discount}
+                            inputProps={{ 
+                                // max: propss.data[ind].Quantity, // Set max limit for the input
+                                min: 0 // Optional: set a minimum limit if needed
+                              }}
+                        />
+                  </TableCell>
                   <TableCell>{props.data?.[ind].Sell_Price}</TableCell>
-                  <TableCell>{obj?.[ind].price}</TableCell>
+                  <TableCell>
+                    
+                    {/* { obj?.[ind].price - obj?.[ind].Discount} */}
+                    { obj?.[ind].price }
+                  </TableCell>
                   <TableCell>
                     <Delete
                     sx={{color: 'red'}}
@@ -342,18 +420,39 @@ export default function CustomTable(props) {
       </Table>
     </TableContainer>
     <Grid container>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
+        <Grid item lg={6} md={6} sm={6} xs={6}>
             <Typography variant='h3' mt={2}>
                     Items : {data.length}
             </Typography>
 
         </Grid>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
+        {
+            discount != 0 && (
+                <Grid item lg={6} md={6} sm={6} xs={6}>
+                    <Typography variant='h3' mt={2}>
+                            Discount : {discount}
+                    </Typography>
+
+                </Grid>
+            )
+        }
+        <Grid item lg={6} md={6} sm={6} xs={6}>
             <Typography variant='h3' mt={2}>
                     Total : {total}
             </Typography>
 
         </Grid>
+        {
+            discount !=0  && (
+                <Grid item lg={6} md={6} sm={6} xs={6}>
+                    <Typography variant='h3' mt={2}>
+                            After Discount : {total - discount}
+                    </Typography>
+
+                </Grid>
+            )
+        }
+
         <Grid item lg={12} md={12} sm={12} xs={12}>
             <form onSubmit={submitFunc}>
                 <Box mt={3}>

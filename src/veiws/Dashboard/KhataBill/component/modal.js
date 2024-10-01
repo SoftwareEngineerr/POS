@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ShowLoader } from '../../../../redux/actions/loader'
 import axios from 'axios'
 import { Grid } from '@mui/material'
-import CustomTable from './table'
+import BarcodeScanner from '../../../../components/barcodescanner/barcodescranner'
+import CalculatorTable from '../../../../components/table/calculatorTable'
 
-const Modal = props => {
+const Modal = (props) => {
     const api = useSelector((state)=>state.Api)
     const [suggestions , setSuggestions] = useState();
     const dispatch = useDispatch();
@@ -68,7 +69,7 @@ const Modal = props => {
                 console.log(data);
                 setData((prevValues) => {
                     // Check if the item already exists
-                    const exists = prevValues.some(item => item.id === res.data.result.id);
+                    const exists = prevValues.some(item => item.ProductId === res.data.result.id);
                     // prevValues.map((item , ind)=>{
                     //     console.log(item.defaultQuatity)
                     //     if(item.defaultQuatity == undefined){
@@ -77,7 +78,7 @@ const Modal = props => {
                     // })
                     // If it doesn't exist, add the new item; otherwise, return the previous values
                     if (!exists) {
-                        return [...prevValues, {...res.data.result}];
+                        return [...prevValues, {...res.data.result , ProductId: res.data.result.id}];
                     }
                     else{
                         
@@ -116,12 +117,13 @@ const Modal = props => {
                     placeholder='Roll No / Name'
                     name='RollNum'
                     />
+                    {/* <BarcodeScanner /> */}
             </Grid>
             <Grid lg={12} md={12} sm={12} xs={12} mt={2}>
                 {
                     data != [] && data != undefined && data && data.length !== 0 && (
                         // console.log(data)
-                        <CustomTable data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
+                        <CalculatorTable updateinfo={props.updateinfo} open={props.open} khataId={props.khataId} data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
                     )
                 }
             </Grid>

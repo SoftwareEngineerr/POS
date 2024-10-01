@@ -75,7 +75,16 @@ const initialState = {
     hintProduct:`${web}dashboard/Product/show`,
     productAdd: `${web}dashboard/Product/add`,
     showQuantity: `${web}dashboard/quantity/show`,
-    productAvailabilityhints:`${web}dashboard/Product_Availabe_hints/show`
+    productAvailabilityhints:`${web}dashboard/Product_Availabe_hints/show`,
+    product_History: `${web}dashboard/Product_History`,
+    all_product_History: `${web}dashboard/All_Product_History`,
+
+
+    //Bills
+    create_Bill: `${web}dashboard/Create_Bill`,
+    track_bill: `${web}dashboard/Track_bill`,
+
+    dashboardTotal: `${web}dashboard/total`
 
 };
 

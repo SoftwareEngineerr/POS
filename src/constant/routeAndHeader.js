@@ -62,7 +62,7 @@ export const RouteHeader = () => {
                   {
                     item: true,
                     navlabel: true,
-                    subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Home </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>کورپاڼه</Typography></div>,
+                    subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Home </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}></Typography></div>,
                     title: '',
                     icon: '',
                     href: '',
@@ -142,47 +142,15 @@ export const RouteHeader = () => {
 
                     
                   
-              ...( getRolse.TeacherReg == 1 || getRolse.TeacherAttendance == 1 || getRolse.TeacherReport == 1 ||  getRolse.SalaryDistribution == 1 || getRolse.StudentActive == 1
-                ?
-                [{
-                item: true,
-                navlabel: true,
-                subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Teacher </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px'}}> معلم</Typography></div>,
-              }]
-              :
-              []
-              ),
-              ...( getRolse.TeacherReg != 1
-                ? []
-                :
-                [{
-                item: true,
-                id: uniqueId(),
-                title: <div><span>Registration </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> معلم ثبت نام</Typography></div>,
-                icon: AppRegistration,
-                href: '/Private/Registration/Teacher',
-                path: '/Private/Registration/Teacher',
-                element: <div id="TechRegistration"><TechRegistration /></div>
-              }]),
-              ...( getRolse.StudentActive != 1
-                ? []
-                :
-                [{
-                item: true,
-                id: uniqueId(),
-                title: <div><span>Activiation</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>  متعلم فعالول</Typography></div>,
-                icon: AddAlert,
-                href: '/Private/Veiw/Students',
-                path: '/Private/Veiw/Students',
-                element: <div id="StudentActivation"><StudentActivation /></div>
-              }]),
+            
+             
             
               ...( getRolse.Class == 1 || getRolse.Admin == 1 || getRolse.Shoqa == 1 ||  getRolse.TeacherActive == 1 || getRolse.Result == 1 || getRolse.StudentStatus == 1 || getRolse.Marif == 1 || getRolse.MobileApp == 1
                 ?
                 [{
                   item: true,
                   navlabel: true,
-                  subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Managment </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>  مدیریت</Typography></div>,
+                  subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Managment </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
                 }]
                 :
                 []
@@ -193,7 +161,7 @@ export const RouteHeader = () => {
                 [{
                 item: true,
                 id: uniqueId(),
-                title: <div><span>Authorities </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> اختیارات   </Typography></div>,
+                title: <div><span>Authorities </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>    </Typography></div>,
                 icon: Api,
                 href: '/Private/Auth/Role',
                 path: '/Private/Auth/Role',
@@ -205,7 +173,7 @@ export const RouteHeader = () => {
                     [{
                     item: true,
                     navlabel: true,
-                    subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Finance </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>  ماليه</Typography></div>,
+                    subheader: <div className="mainMenuMain"><Typography variant="span" sx={{display: (theme)=>theme.palette.sidemenutext.display.display}}>Finance </Typography><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
                   }]
                   :
                   []

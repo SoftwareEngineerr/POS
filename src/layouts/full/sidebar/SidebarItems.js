@@ -31,7 +31,7 @@ const SidebarItems = () => {
   })
 
   return (
-    <Box pl={1} pr={2}>
+    <Box pl={0} pr={2}>
       
 
       <List sx={{ pt: 0 }} className="sidebarNav">

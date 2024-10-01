@@ -19,9 +19,9 @@ const NavItem = ({ item, level, pathDirect, onClick }) => {
   const ListItemStyled = styled(ListItem)(() => ({
     whiteSpace: 'nowrap',
     marginBottom: '1px',
-    marginLeft: '10px',
-    padding: '1px 4px',
-    borderRadius: '8px',
+    marginLeft: '4px',
+    padding: '7px',
+    borderRadius: '19px',
     backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
     color:
       theme.palette.text.secondary,
