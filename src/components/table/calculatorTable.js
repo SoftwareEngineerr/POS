@@ -290,7 +290,8 @@ export default function CalculatorTable(props) {
             khataId: props.khataId,
             discount: discount,
             total: total,
-            items: data.length
+            items: data.length,
+            pay: inputValues.pay
         }
         console.log(props.khataId)
         dispatch(PostRequest(api.create_Bill , userToken , payload))
@@ -322,6 +323,27 @@ export default function CalculatorTable(props) {
             return updatedData; // Return the updated array for setObj
         });
     };
+    const pay = (e) => {
+        if((total - discount) >= e.target.value){
+            setInputValues((prevValues) => ({
+                ...prevValues,
+                pay: parseInt(e.target.value),
+            }));
+
+            // //console.log(e.target.value , props.data[ind].Sell_Price , e.target.value * props.data[ind].Sell_Price,)
+            // props.data[ind].defaultQuatity = e.target.value
+            e.target.style.background = 'white'
+        }
+        else{
+            e.target.value = total - discount
+            // e.target.style.border = '1px solid red'
+            e.target.style.background = '#ffcccc'
+            setInputValues((prevValues) => ({
+                ...prevValues,
+                pay: parseInt(e.target.value),
+            }));
+        }
+    }
     
   return (
     <>
@@ -452,7 +474,19 @@ export default function CalculatorTable(props) {
                 </Grid>
             )
         }
-
+        {
+            props.pay && (
+                <Grid lg={8} md={8} sm={12} xs={12}>
+                    <Box mt={2}>
+                        <Input
+                        placeholder="Money To Pay"
+                        type="number"
+                        onChange={pay}
+                        />
+                    </Box>
+                </Grid>
+            )
+        }
         <Grid item lg={12} md={12} sm={12} xs={12}>
             <form onSubmit={submitFunc}>
                 <Box mt={3}>

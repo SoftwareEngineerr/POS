@@ -123,7 +123,7 @@ const Modal = (props) => {
                 {
                     data != [] && data != undefined && data && data.length !== 0 && (
                         // console.log(data)
-                        <CalculatorTable updateinfo={props.updateinfo} open={props.open} khataId={props.khataId} data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
+                        <CalculatorTable pay="true" updateinfo={props.updateinfo} open={props.open} khataId={props.khataId} data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
                     )
                 }
             </Grid>

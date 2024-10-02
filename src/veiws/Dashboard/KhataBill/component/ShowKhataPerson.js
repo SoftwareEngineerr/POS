@@ -7,6 +7,7 @@ import axios from 'axios'
 import { ShowLoader } from '../../../../redux/actions/loader'
 import { CustomBtn } from '../../../../components/button/button'
 import Modal from './modal'
+import PayModal from './PayModal'
 
 const ShowKhataPerson = props => {
     const image = useSelector((state)=>state.Api.imageServer)
@@ -15,6 +16,10 @@ const ShowKhataPerson = props => {
     const api = useSelector((state)=>state.Api)
     const [ data , setData  ] = useState()
     const [open, setOpen] = useState(false);
+    const [payOpen, setPayOpen] = useState(false);
+    const [update , setUpdate] = useState(0);
+    
+    const userdata = useSelector((state)=>state.FETCHPOS.data.response)
 
 
     
@@ -42,15 +47,18 @@ const ShowKhataPerson = props => {
         } catch (err) {
           console.error(err);
         }
-    },[props.id])
+    },[props.id , userdata , update])
 
     const openclose = () => {
         setOpen(false)
     }
-    // const openfunc = () => {
-    //     setOpen(true)
-    // }
-
+    const payOpenclose = () => {
+        setPayOpen(false)
+    }
+    const closepaymodal = () => {
+        setPayOpen(false)
+        setUpdate((update)=>update+1)
+    }
 
   return (
     <div>
@@ -84,6 +92,41 @@ const ShowKhataPerson = props => {
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={openclose}>
+                    Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog
+            open={payOpen}
+            onClose={payOpenclose}
+            aria-labelledby="responsive-dialog-title"
+            className='dialogCustomSize'
+            
+            >
+                <DialogTitle id="responsive-dialog-title" >
+                    Paying 
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        <Box 
+                        sx={{
+                            minWidth: '400px',
+                            minHeight: '448px'
+                        }}
+                        >
+                            <PayModal
+                            khataId={props.id}
+                            Amount={data?.Amount}
+                            open={()=>setOpen(false)}
+                            updateinfo={props.updateinfo}
+                            closepaymodal={closepaymodal}
+                              />
+                        </Box>
+
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={payOpenclose}>
                     Cancel
                     </Button>
                 </DialogActions>
@@ -125,12 +168,33 @@ const ShowKhataPerson = props => {
                             </Grid>
                             <Grid item lg={12} md={12} sm={12} xs={12}>
                                 <Typography variant='p'>
+                                    Amount To Pay: 
+                                    {
+                                        data.Amount < 0 ?
+                                            <Typography variant='b' sx={{color: 'red'}}>{data.Amount}</Typography>   
+                                            :
+                                            <Typography variant='b' sx={{color: 'green'}}>{data.Amount}</Typography>   
+                                    }
+                                </Typography>
+                            </Grid>
+                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                <Typography variant='p'>
                                     Create Bill: <b>
                                         <CustomBtn
                                         click={()=>setOpen(true)}
                                         data="Create New Bill"
                                         />
                                     </b>
+                                </Typography>
+                            </Grid>
+                            <Grid item lg={12} md={12} sm={12} xs={12}>
+                                <Typography variant='p'>
+                                    <Box  mt={1}>
+                                        <CustomBtn
+                                        click={()=>setPayOpen(true)}
+                                        data="Pay"
+                                        />
+                                    </Box>
                                 </Typography>
                             </Grid>
                     </Grid>

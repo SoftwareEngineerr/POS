@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Add, Delete, Description, Edit } from '@mui/icons-material';
+import { Add, Delete, Description, Edit, PlayArrowOutlined } from '@mui/icons-material';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TablePagination, Typography } from '@mui/material';
 import { useTheme } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -123,12 +123,34 @@ const PaginationTable = (props) => {
                                 :
                                 null
                             }
-                            
                             {fetchData.map((insideitem , ind)=>
                                 <TableCell>
                                 {item[insideitem]}
                             </TableCell> 
                             )
+                            }
+                            {
+                                props.watch == 'true' ?
+                                <TableCell>
+                                    <Box
+                                     onClick={()=>props.showData(item[props.watchitem])}
+                                     sx={{
+                                        background: style.primary.main,
+                                        color : 'white',
+                                        borderRadius: '3px',
+                                        display: 'flex',
+                                        alignItems:'center',
+                                        justifyContent: 'center',
+                                        width: '50px',
+                                        padding: '4px',
+                                    }}
+                                     >
+                                            <PlayArrowOutlined />
+
+                                    </Box>
+                                </TableCell>
+                                :
+                                null
                             }
                         </TableRow>
                     )

@@ -83,6 +83,7 @@ const initialState = {
     //Bills
     create_Bill: `${web}dashboard/Create_Bill`,
     track_bill: `${web}dashboard/Track_bill`,
+    userPay: `${web}dashboard/userPay`,
 
     dashboardTotal: `${web}dashboard/total`
 

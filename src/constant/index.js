@@ -502,6 +502,16 @@ export const Main = ()=> {
             title:'Income',
             description: 'Income'
         
-    }
+    },
+    Return:{
+        inputs:[
+            // {data: 'Bill Id', type: 'text', required: true, name: 'Bill_id', feildtype:'button', lg: 12 , md: 12, sm: 12, xs: 12, lang: 'en'},
+            {data: 'Bill Id', type: 'number', required: true, name: 'bill_id', feildtype:'input', lg: 12 , md: 12, sm: 12, xs: 12, lang:'en'},
+
+        ],
+        title:'Income',
+        description: 'Income'
+    
+        }
     }
 };

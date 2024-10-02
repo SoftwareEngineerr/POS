@@ -8,6 +8,7 @@ import { Grid, Typography } from '@mui/material';
 import CustomTable from '../../../components/table/SimpleTable';
 import ShowKhataPerson from './component/ShowKhataPerson';
 import PaginationTable from '../../../components/table/paginationTable';
+import Receipt from '../../../components/pdf/pdf';
 
 const KhataBill = props => {
     const [suggestions , setSuggestions] = useState();
@@ -115,13 +116,26 @@ const KhataBill = props => {
 
             }
       }
+
+      const items = [
+        { name: 'Item 1', price: 10.0 },
+        { name: 'Item 2', price: 15.5 },
+      ];
+      
+      const total = items.reduce((sum, item) => sum + item.price, 0);
+    
+
+      const showData = (param) => {
+        alert(param)
+      }
     
   return (
     <div>
       {
         data && (
           <div>
-              
+            {/* <Receipt items={items} total={total} /> */}
+              {/* <Receipt items={items} total={total} customerName="John Doe" /> */}
           </div>
         )
       }
@@ -154,13 +168,16 @@ const KhataBill = props => {
                                 {/* <CustomTable data={serverData.history} /> */}
                                 <PaginationTable 
                                 data={serverData.history} 
-                                title={['Total','Discount','Products', 'Date']}
-                                fetchData={['Total','Discount','Products', 'Date']}
+                                title={['Bill Id','Discount','Products', 'Date', 'Total', 'Watch']}
+                                fetchData={['Bill Id','Discount','Products', 'Date', 'Total']}
                                 // myfunc={myfunc}
                                 // image='true'
                                 // page={(e)=>setPage(e)}
+                                watch='true'
+                                watchitem='Bill Id'
                                 page={(e)=>tryFetch(undefined,e)}
                                 rowsPerPage={(e)=>rowsfunc(e)}
+                                showData={showData}
                                 // butnName='Add Product'
                                 /> 
                             </>

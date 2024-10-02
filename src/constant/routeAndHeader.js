@@ -22,6 +22,7 @@ import Inventory from "../veiws/Dashboard/Inventory";
 import Khata from "../veiws/Dashboard/Khata";
 import ProductAvailable from "../veiws/Dashboard/Product_Availablity";
 import KhataBill from "../veiws/Dashboard/KhataBill/KhataBill";
+import ReturnProduct from "../veiws/Dashboard/ReturnProduct/ReturnProduct";
 
 // console.log(SelectedData())
 export const RouteHeader = () => {
@@ -139,6 +140,21 @@ export const RouteHeader = () => {
                         },
                       ]
                       ),
+                      ...( getRolse.Khata_Bill != 1
+                        ? []
+                        :
+                        [
+                          {
+                            item: true,
+                            id: uniqueId(),
+                            title: <div><span>Return Product </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                            icon: AppRegistration,
+                            href: '/Private/Return_Product',
+                            path: '/Private/Return_Product',
+                            element: <div id="Khata"><ReturnProduct /></div>
+                          },
+                        ]
+                        ),
 
                     
                   
