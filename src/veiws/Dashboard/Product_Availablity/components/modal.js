@@ -122,7 +122,7 @@ const Modal = (props) => {
                     <ShowProduct 
                     handleInputChange={suggestionhandleInputChange}
                     Suggestions={suggestions}
-                    placeholder='Roll No / Name'
+                    placeholder='BarCode / Name'
                     name='RollNum'
                     />
 

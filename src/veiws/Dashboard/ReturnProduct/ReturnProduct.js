@@ -4,6 +4,11 @@ import CustomForm from '../../../components/form/form';
 import { Main } from '../../../constant';
 import { CustomBtn } from '../../../components/button/button';
 import { Box, Grid } from '@mui/material';
+import { ShowLoader } from '../../../redux/actions/loader';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import CalculatorTable from '../../../components/table/calculatorTable';
+import HistoryCalculatorTable from '../../../components/table/historycalculatorTable';
 
 const ReturnProduct = (props) => {
     const [data , setData] = useState(Main().Return);
@@ -12,7 +17,11 @@ const ReturnProduct = (props) => {
         getfilterdata
             .map((item) => [item.name, ''])
     ));
+    const [ realdata , setRealdata ] = useState()
     const [inputValues, setInputValues] = useState(initialInputValues);
+    const dispatch = useDispatch();
+    const api = useSelector((state)=>state.Api)
+    const [ list , setList ] = useState()
 
     function handleInputChange(e) {
         console.log(inputValues )
@@ -21,6 +30,41 @@ const ReturnProduct = (props) => {
             [e.target.name]: e.target.value,
         }));
     }
+    const submitfunc = (e) => {
+        e.preventDefault()
+
+            const userToken = JSON.parse(sessionStorage.getItem('User_Data'))?.token || undefined;
+            try {
+              dispatch(ShowLoader('1'))
+              axios.post(`${api.track_Bill_Id}`, inputValues, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${userToken}`,
+                },
+              })
+              .then(async(res) => {
+                if (res.status === 200) {
+                  console.log(res.data.productresults)
+                  setRealdata(res.data.productresults)
+                  setList(res.data.fakedata)
+                  dispatch(ShowLoader('0'))
+                }
+                else{
+                  dispatch(ShowLoader('0'))
+                }
+              })
+              .catch((err) => {
+                console.error(err); // Log the error response for debugging
+                dispatch(ShowLoader('0'))
+
+              });
+            } catch (err) {
+              console.error(err);
+              dispatch(ShowLoader('0'))
+
+            }
+        console.log(inputValues)
+    }
   return (
     <div>
         <Grid container>
@@ -28,15 +72,31 @@ const ReturnProduct = (props) => {
                 <CustomForm data={data.inputs} handleInputChange={handleInputChange}  />
                 {
                     inputValues.bill_id ? (
-                        <Box mt={1}>
-                            <CustomBtn
-                                data="Watch Bill"
-                            />
-                        </Box>
+                        <form onSubmit={submitfunc}>
+                            <Box mt={1}>
+                                <CustomBtn
+                                    data="Watch Bill"
+                                />
+                            </Box>
+                        </form>
                     )
                     :
                     null
                 }
+            </Grid>
+                <Grid item lg={12} md={12} sm={12} xs={12}>
+
+                    {
+                        list && 
+                            list[0] ? (
+                            <Box mt={2}>
+                            <HistoryCalculatorTable data={list} realdata={realdata} bill_id={inputValues.bill_id} />
+                            </Box>
+                        )
+                        :
+                        null
+                    
+                    }
             </Grid>
         </Grid>
     </div>
