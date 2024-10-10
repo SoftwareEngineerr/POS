@@ -33,13 +33,14 @@ return props.data.map((item, ind) => (
         ||
         (item.name == 'Comments' || item.name == 'Description' &&  (
             <Grid item lg={item.lg} key={ind} md={item.md} sm={item.sm} xs={item.xs}>
-                <textarea rows="10" cols="70"
+                <textarea rows="10" 
                 // onClick={(event) => props.handleRadioChange(event)}
                 name={item.name}
                 type={item.type}
                 defaultValue={item.value}
                 style={{
-                marginTop: '20px'
+                marginTop: '20px',
+                width: '100%'
                 }}
                 onChange={(event) => props.handleInputChange(event)}
                 sx={item.lang === 'ph' ? { direction: 'rtl', ...item.style } : item.style}

@@ -277,10 +277,6 @@ export const Main = ()=> {
             // {data: 'اساس نمبر', type: 'text', required: true, name: 'Roll-Pashto', feildtype:'input', lg: 4 , md: 4, sm: 6, xs: 12, lang:'ph'},
 
 
-            {data:'Old Roll No', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            // {data: 'Old Roll No', type: 'text', required: true, name: 'Old-Assas-No', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
-            {data: 'پخوانۍ اساس نمبر', type: 'number',  name: 'OldAssasNo', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
-            
             {data:'Tel Num 1', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
             // {data: 'Tel Num 1', type: 'text', required: true, name: 'Tel-Num2', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
             {data: 'ټیلیفون شمیره1', type: 'number', required: true, name: 'TellNo1', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
@@ -288,11 +284,7 @@ export const Main = ()=> {
             {data:'Tel Num 2', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
             // {data: 'Tel Num 2', type: 'text', required: true, name: 'Tel-Num2', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
             {data: 'ټیلیفون شمیره2', type: 'number', name: 'TellNo2', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
-            
-            {data:'Reference', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            {data: 'Reference', type: 'text', name: 'Reference', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
-            {data: 'واسطه', type: 'text',  name: 'Reference_P', feildtype:'input', lg: 4 , md: 4, sm: 6, xs: 12, lang:'ph'},
-            
+           
             // {data:'Admission Fee', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
             // // {data: 'Admission Fee', type: 'text', required: true, name: 'Admission-Fee', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
             // {data: 'داخله فیس', type: 'number', required: true, name: 'AdmissionFee', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
@@ -317,23 +309,6 @@ export const Main = ()=> {
             // {data: 'Admission Date', type: 'text', required: true, name: 'Admission-Date', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
             {data: 'تاریخ داخله', type: 'text', required: true, name: 'AdmissionDate', feildtype:'date', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
 
-            // Redio Buttons Start
-            {data:'English Center  انګلیسی سنټر', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            {data: 'Yes', type: 'radio', name: 'EnglishCenter', feildtype:'radio', lg: 5 , md: 5, sm: 6, xs: 6,},
-            {data: 'No', type: 'radio', name: 'EnglishCenter', feildtype:'radio', lg: 4 , md: 4, sm: 6, xs: 6,},
-
-            {data:'Arabic Center عربی سنټر:', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            {data: 'Yes', type: 'radio', name: 'ArabicCenter', feildtype:'radio', lg: 5 , md: 5, sm: 6, xs: 6,},
-            {data: 'No', type: 'radio', name: 'ArabicCenter', feildtype:'radio', lg: 4 , md: 4, sm: 6, xs: 6,},
-
-            {data:'Computer Center کمپیوټرسنټر:', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            {data: 'Yes', type: 'radio', name: 'ComputerCenter', feildtype:'radio', lg: 5 , md: 5, sm: 6, xs: 6,},
-            {data: 'No', type: 'radio', name: 'ComputerCenter', feildtype:'radio', lg: 4 , md: 4, sm: 6, xs: 6,},
-
-            {data:'Holy Quran  قرآن کریم:', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            {data: 'Yes', type: 'radio', name: 'HolyQuran', feildtype:'radio', lg: 5 , md: 5, sm: 6, xs: 6,},
-            {data: 'No', type: 'radio', name: 'HolyQuran', feildtype:'radio', lg: 4 , md: 4, sm: 6, xs: 6,},
-
             // Radio button ended
 
             // {data:'Exit Date ', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
@@ -348,11 +323,7 @@ export const Main = ()=> {
             // {data: 'No', type: 'radio' , required: true, name: 'Orphan', feildtype:'radio', lg: 4 , md: 4, sm: 6, xs: 6,},
 
             
-            {data:'Old Dues', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            // {data: 'Comments', type: 'text', required: true, name: 'Comments', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
-            {data: 'زاړه واجبات', type: 'text', name: 'OldDues', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
-
-
+            
             {data:'User ID', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
             {data: 'Email', type: 'text', required: true, name: 'Email', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang: 'en'},
             // {data: 'دعکس پورته کول', type: 'text', required: true, name: 'Picture-Upload-Pashto', feildtype:'input', lg: 4 , md: 4, sm: 6, xs: 12, lang:'ph'},
@@ -371,9 +342,9 @@ export const Main = ()=> {
             {data: 'Picture', type: 'text', name: 'Picture', feildtype:'image', lg: 9 , md: 9, sm: 12, xs: 12, lang: 'en'},
 
             
-            {data:'Comments', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
-            // {data: 'Comments', type: 'text', required: true, name: 'Comments', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
-            {data: 'تبصرې', type: 'text', name: 'Comments', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
+            // {data:'Comments', feildtype:'label' , lg: 3 , md: 3, sm: 12, xs: 12},
+            // // {data: 'Comments', type: 'text', required: true, name: 'Comments', feildtype:'input', lg: 5 , md: 5, sm: 6, xs: 12, lang: 'en'},
+            // {data: 'تبصرې', type: 'text', name: 'Comments', feildtype:'input', lg: 9 , md: 9, sm: 12, xs: 12, lang:'ph'},
         ],
         butn:'Register ثبت',
         forget:'Forgot Password ?',
@@ -411,12 +382,12 @@ export const Main = ()=> {
     },
     Expense:{
         inputs:[
-            {data: 'Afn', type: 'number', required: true,  style:'max-width: 800px', name: 'Payment', feildtype:'input', lg: 8 , md: 8, sm: 12, xs: 12, lang:'en'},
-            {data: 'Description', type: 'text', required: true,  style:'max-width: 800px', name: 'Description', feildtype:'input', lg: 8 , md: 8, sm: 12, xs: 12, lang:'en'},
+            {data: 'Afn', type: 'number', required: true,  style:'max-width: 800px', name: 'Payment', feildtype:'input', lg: 7 , md: 7, sm: 12, xs: 12, lang:'en'},
+            {data: 'Description', type: 'text', required: true,  style:'max-width: 800px', name: 'Description', feildtype:'input', lg: 7 , md: 7, sm: 12, xs: 12, lang:'en'},
         ],
         btn:{
             data:'Submit',
-            style:{maxWidth: '850px'}
+            // style:{maxWidth: '850px'}
         },
         Date:[
             {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'FromDate', feildtype:'date', lg: 4 , md: 4, sm: 6, xs: 12, lang:'en'},
@@ -425,8 +396,8 @@ export const Main = ()=> {
     },
     Income:{
         inputs:[
-            {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'FromDate', feildtype:'date', lg: 6 , md: 4, sm: 6, xs: 12, lang:'en'},
-            {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'ToDate', feildtype:'date', lg: 6 , md: 4, sm: 6, xs: 12, lang:'en'},
+            {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'FromDate', feildtype:'date', lg: 7 , md: 7, sm: 12, xs: 12, lang:'en'},
+            {data: 'Date', type: 'text', required: true,  style:{maxWidth: '800px'}, name: 'ToDate', feildtype:'date', lg: 7 , md: 7, sm: 12, xs: 12, lang:'en'},
         ],
         title:'Income',
         description: 'Income'

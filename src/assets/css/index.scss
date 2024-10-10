@@ -510,3 +510,24 @@ background-color: #d8d8d8;
     color: white;
   }
 }
+#Income .css-tfsoje-MuiFormControl-root-MuiTextField-root{
+  max-width: 100% !important;
+}
+#Receipt{
+  table{
+   width: 100%;
+   margin-top: 3px;
+
+   td{
+    border: 0
+   }
+  }
+   .border{
+    border: 0;
+     border-top: 1px dotted #969696;
+     width: 100%;
+     height: 1px;
+     margin-top: 7px
+   }
+
+}

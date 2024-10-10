@@ -332,7 +332,7 @@ export default function HistoryCalculatorTable(props) {
     
 
 
-    const submitFunc = (e) => {
+    const submitFunc = async(e) => {
         e.preventDefault();
         const data = obj.map((item , ind)=>{
             return { ...item, ProductId:props.data[ind].ProductId , PerPice: props.data[ind].Sell_Price}
@@ -349,8 +349,8 @@ export default function HistoryCalculatorTable(props) {
             bill_id: parseInt(props.bill_id)
         }
         console.log(payload)
-        dispatch(PostRequest(api.return_Bill , userToken , payload))
-        // props.open()
+        await dispatch(PostRequest(api.return_Bill , userToken , payload))
+        await props.update()
         // props.updateinfo()
     }
     const minusMoney = (value, ind) => {

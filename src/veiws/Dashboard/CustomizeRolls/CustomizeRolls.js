@@ -63,41 +63,29 @@ const CustomizeRolls = props => {
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Fees and Salary  فیس او معاش" {...a11yProps(0)} />
-                        <Tab label="Private Message" {...a11yProps(1)} />
-                        <Tab label="Veiw All Member Messages" {...a11yProps(2)} />
-                        <Tab label="Public Annoucement عامه اعلان" {...a11yProps(3)} />
-                        <Tab label="Holiday رخصتي" {...a11yProps(4)} />
-                        <Tab label="Authority کارمنداختیار" {...a11yProps(5)} />
+                        {/* <Tab label="Fees and Salary  فیس او معاش" {...a11yProps(0)} /> */}
+                        <Tab label="Private Message" {...a11yProps(0)} />
+                        <Tab label="Veiw All Member Messages" {...a11yProps(1)} />
+                        <Tab label="Authority" {...a11yProps(2)} />
                         {/* <Tab label="Item Three" {...a11yProps(2)} /> */}
                         </Tabs>
                     </Box>
-                    <CustomTabPanel value={value} index={0}>
+                    {/* <CustomTabPanel value={value} index={0}>
                         <Grid item lg={12} md={12}>
                             <Annoucement />
                         </Grid>
-                    </CustomTabPanel>
-                    <CustomTabPanel value={value} index={1}>
+                    </CustomTabPanel> */}
+                    <CustomTabPanel value={value} index={0}>
                         <Grid item lg={6} md={6}>
                                 <PrivateMessage />
                         </Grid>
                     </CustomTabPanel>
-                    <CustomTabPanel value={value} index={2}>
+                    <CustomTabPanel value={value} index={1}>
                             <Grid item lg={6} md={6}>
                                 <VeiwAllmemberMessages />
                             </Grid>
                     </CustomTabPanel>
-                    <CustomTabPanel value={value} index={3}>
-                        <Grid item lg={6} mt={2}>
-                            <PublicAnnoc />
-                        </Grid>
-                        </CustomTabPanel>
-                    <CustomTabPanel value={value} index={4}>
-                        <Grid item lg={12} md={12} mt={2}>
-                            <Holiday />
-                        </Grid>
-                    </CustomTabPanel>
-                    <CustomTabPanel value={value} index={5}>
+                    <CustomTabPanel value={value} index={2}>
                         <Box >
                             <Stack>
                                 <Grid container sx={{maxWidth: '1200px'}}>

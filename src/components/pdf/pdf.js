@@ -1,32 +1,109 @@
 // src/Receipt.js
-import React from 'react';
+import React, { useState } from 'react';
 import jsPDF from 'jspdf';
+import { Box, Grid, Typography } from '@mui/material';
 
-const Receipt = ({ items, total }) => {
-  const generatePDF = () => {
-    const doc = new jsPDF();
-
-    // Add content to the PDF
-    doc.setFontSize(12);
-    doc.text('Receipt', 20, 20);
-    
-    items.forEach((item, index) => {
-      doc.text(`${item.name}: $${item.price.toFixed(2)}`, 20, 30 + index * 10);
-    });
-
-    doc.text(`Total: $${total.toFixed(2)}`, 20, 30 + items.length * 10);
-    
-    // Save the PDF or send to the printer directly
-    doc.autoPrint(); // This will open the print dialog
-    doc.output('dataurlnewwindow'); // Opens the PDF in a new window
-  };
-
+const Receipt = (props) => {
+    console.log(props.data)
+    const [data , setData] = useState(props.data)
   return (
-    <div>
-      <h1>Receipt</h1>
-      <button onClick={generatePDF}>Print Receipt</button>
+    <div id="Receipt">
+        {
+            props.data ? 
+            <Box>
+                <Box textAlign='center'>
+                    <Typography variant='h2' sx={{margin:'0'}}>
+                        {data.OwenrDetails.Shop_Name}
+                    </Typography>
+                    <Typography variant='p'>
+                        {data.OwenrDetails.Address}
+                    </Typography>
+                    <br />
+                    <Typography variant='p'>
+                        Phone: {data.OwenrDetails.customerMobile}
+                    </Typography>
+                    <hr />
+                </Box>
+                <Box>
+                    <Typography variant='b' sx={{margin:'0'}}>
+                        Bill No : {data.bill_id}
+                    </Typography>
+                    <br />
+                    <Typography variant='b' sx={{margin:'0'}}>
+                        Date : 2024-10-1
+                    </Typography>
+
+                        <div class="border"></div>
+                    <table >
+                        <thead>
+                            <tr>
+                                <td>
+                                    Item
+                                </td>
+                                <td>
+                                    Qty
+                                </td>
+                                <td>
+                                    Rate
+                                </td>
+                                <td>
+                                    Dis
+                                </td>
+                                <td>
+                                    Amt
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                data.fakedata.map((item , ind)=>
+                                    <tr>
+                                        <td>
+                                            {ind+1}. {item.Name}
+                                        </td>
+                                        <td>
+                                            {item.Quantity}
+                                        </td>
+                                        <td>
+                                            {item.Sell_Price}
+                                        </td>
+                                        <td>
+                                            Dis
+                                        </td>
+                                        <td>
+                                            {item.Sell_Price * item.Quantity}
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                          
+                        </tbody>
+                    </table> 
+                    <Box mt={4}>
+                    <hr />
+                    <Grid container>
+                        <Grid item lg={6} md={6} sm={6} xs={6}>
+                            <Typography variant='h3'>
+                                Total
+                            </Typography>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={6}>
+                         <Typography variant='h3' textAlign='right'>
+                                1554
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <hr />
+                    </Box>
+
+                </Box>
+            </Box>
+            :
+            null
+        }
     </div>
   );
 };
 
 export default Receipt;
+

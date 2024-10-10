@@ -65,79 +65,84 @@ export function FullDate(getprops, startOrEndDateNames) {
     console.log(getConvertedDate)
   }
   return (
-    <Box sx={{ padding: '10px 10px 10px 0px' }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: getprops.width ? getprops.width : '100%' }}>
-        {/* First DatePicker */}
-          <DatePicker
-          open={isCalendarOpen}
-          onOpen={openCalendar}
-          onClose={closeCalendar}
-          defaultValue={dayjs(Date.now())}
-          sx={{ width: '100%' }}
-          //value={selectedDate}
+    <Box sx={{ padding: '10px 10px 10px 0px' , width: '100%'}}>
+      <Grid container>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: '100%' , maxWidth:'100%' }}>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: getprops.width ? getprops.width : '100%' }}> */}
+              {/* First DatePicker */}
+                <DatePicker
+                open={isCalendarOpen}
+                onOpen={openCalendar}
+                onClose={closeCalendar}
+                defaultValue={dayjs(Date.now())}
+                sx={{ width: '100%', maxWidth:'100%' }}
+                //value={selectedDate}
 
-          value={selectedDate ? selectedDate : getprops.value}
-          maxDate={getprops.max ? getprops.max : null} // Set the maximum selectable date
-          minDate={getprops.min ? getprops.min : null} // Set the maximum selectable date
-          name={getprops && getprops.name}
-          // value=""
-          onChange={(date) => {
-            myfunc(date);
-            setSelectedDate(date);
-            getprops && getprops.onChange && getprops.onChange(date.format('D MMMM YYYY'), getprops.name, gregoriatDate, arbic);
-            getprops && getprops.throwfullevent && getprops.throwfullevent(date);
+                value={selectedDate ? selectedDate : getprops.value}
+                maxDate={getprops.max ? getprops.max : null} // Set the maximum selectable date
+                minDate={getprops.min ? getprops.min : null} // Set the maximum selectable date
+                name={getprops && getprops.name}
+                // value=""
+                onChange={(date) => {
+                  myfunc(date);
+                  setSelectedDate(date);
+                  getprops && getprops.onChange && getprops.onChange(date.format('D MMMM YYYY'), getprops.name, gregoriatDate, arbic);
+                  getprops && getprops.throwfullevent && getprops.throwfullevent(date);
 
 
-          }}
-          renderInput={(props) => (
-            <TextField
-              {...props}
-              {...getprops}
-              label={getprops.name == 'startDate' || getprops.name == 'FromDate' || getprops.name == 'ChangeDateTo' ? 'Start' : getprops.name == 'endDate' ||  getprops.name == 'ToDate'? 'End'  : 'Select Date'}
-              variant="outlined"
-              id="datePicker"
-              value={selectedDate}
-              //readOnly
-              className='datePickerInput'
-              onClick={openCalendar}
-              onFocus={(e) => e.target.blur()} // Prevent default behavior on focus
-              sx={{ width: "100%", ...getprops.sx }}
-              // mb={4}
-              // value={selectedDate ? selectedDate.format('MMMM YYYY') : null}
-              required
-            />
-          )}
+                }}
+                renderInput={(props) => (
+                  <TextField
+                    {...props}
+                    {...getprops}
+                    label={getprops.name == 'startDate' || getprops.name == 'FromDate' || getprops.name == 'ChangeDateTo' ? 'Start' : getprops.name == 'endDate' ||  getprops.name == 'ToDate'? 'End'  : 'Select Date'}
+                    variant="outlined"
+                    id="datePicker"
+                    value={selectedDate}
+                    //readOnly
+                    className='datePickerInput'
+                    onClick={openCalendar}
+                    onFocus={(e) => e.target.blur()} // Prevent default behavior on focus
+                    sx={{ ...getprops.sx ,  width: "100%"}}
+                    // mb={4}
+                    // value={selectedDate ? selectedDate.format('MMMM YYYY') : null}
+                    required
+                  />
+                )}
 
-          required
-        />
-        <Grid className='dateOther' marginTop={1}  container >
-          <Grid lg={6} item>
-            <Box pr={1}>
-              <Input
-                value={gregoriatDate}
-                // {...getprops}
-                style={{ backgroundColor: '#f5f4f4', border: '1px solid #f5f4f4' }}
-                name="pashto-Date"
-                readOnly
-                disabled
+                required
               />
-            </Box>
-          </Grid>
-          <Grid lg={6} item>
-            <Box pl={1} >
-              <Input
-                value={arbic}
-                // {...getprops}
-                style={{ backgroundColor: '#f5f4f4', border: '1px solid #f5f4f4' }}
-                name="pashto-Date"
-                readOnly
-                disabled
-              />
-            </Box>
-          </Grid>
-        </Grid>
+              <Grid className='dateOther' marginTop={1}  container >
+                <Grid lg={6} item>
+                  <Box pr={1}>
+                    <Input
+                      value={gregoriatDate}
+                      // {...getprops}
+                      style={{ backgroundColor: '#f5f4f4', border: '1px solid #f5f4f4' }}
+                      name="pashto-Date"
+                      readOnly
+                      disabled
+                    />
+                  </Box>
+                </Grid>
+                <Grid lg={6} item>
+                  <Box pl={1} >
+                    <Input
+                      value={arbic}
+                      // {...getprops}
+                      style={{ backgroundColor: '#f5f4f4', border: '1px solid #f5f4f4' }}
+                      name="pashto-Date"
+                      readOnly
+                      disabled
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
 
-      </LocalizationProvider>
+            </LocalizationProvider>
+          </Grid>
+      </Grid>
     </Box>
   );
 }

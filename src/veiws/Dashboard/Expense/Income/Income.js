@@ -59,7 +59,7 @@ const Income = (props) => {
                     // setServerData(response.data.result);
                     console.log(response.data.result)
                     if(response.data.result != []){
-                        console.log(response.data.result.FirstRow)
+                        // console.log(response.data.result.FirstRow)
                         setServerData((prevValues) => ({
                             ...prevValues,
                             data: response.data.result,
@@ -80,65 +80,42 @@ const Income = (props) => {
             ...prevValues,
             [name]:  `${converterToDate.getFullYear()}-${converterToDate.getMonth() + 1}-${converterToDate.getDate()}`
     }));
-    fetchData(e,name)
+    // fetchData(e,name)
+    }
+    const submitFunc = (e) => {
+        e.preventDefault()
+        fetchData()
     }
       
-        const icomefunc = (Name , Ammount) => {
-        return {
-            Name , Ammount
-        }
-    }
-
-    const icomedata =[
-        icomefunc('Fess','20000'),
-        icomefunc('Fess','20000'),
-    ]
   return (
       <PageContainer title={data.title} description={data.description}>
 
 
         <Box mt={3}>
                     <Grid container>
-                        <CustomForm data={data.inputs}  ChangeDate={ChangeDate}  />            
+                        <CustomForm data={data.inputs}  ChangeDate={ChangeDate}  /> 
+                        {
+                            inputValues.FromDate && inputValues.ToDate ? (
+                                <Grid item lg={7} md={7} sm={12} xs={12}>
+                                    <Box mt={2}>
+                                        <form onSubmit={submitFunc}>
+                                            <CustomBtn data="Show Income"  />
+                                        </form>
+                                    </Box>
+                                </Grid>
+                            )
+                            :
+                            null
+                        }               
                     </Grid>
                     {
-                        serverData && serverData.data && serverData.data.length != 0 && (
-                            <>
-                                <YearlyBreakup percentage={serverData.data.SecondRow[0].percentage} getdate={inputValues} data={serverData.data.SecondRow[0]} total={serverData.data.FirstRow[4].Payment}  />
-                                {/* <CustomForm data={serverData.veiwDonation} handleInputChange={handleInputChange} /> */}
-                                {/* <CustomTable data={serverData.veiwDonation} /> */}
-                                <Box mt={2}>
-                                    <Typography variant='h4' mb={2}>
-                                        Income  عاید
-                                    </Typography>
-                                    <CustomTable data={serverData.data.FirstRow} />
-                                </Box>
-                                {/* <Box mt={4}>
-                                    <Typography variant='h4'  mb={2}>
-                                        Expense  لګښت 
-                                    </Typography>
-                                    <CustomTable data={[serverData.data.SecondRow]} />
-                                </Box>
-                                <Box>
-                                    <Typography variant='h4'  mt={2}>
-                                        <Grid>
-                                        <Typography variant='span' mr={1} sx={{color: style.error.main}}>
-                                            Total Income    عواید
-                                        </Typography>
-                                        </Grid>
-                                         
-                                         <Grid>
-                                            <Typography variant='span'  sx={{color: style.primary.main}}>
-                                                {
-                                                    serverData.data.ThirdRow.Income
-                                                }
-                                            </Typography>
-                                         </Grid>
-                                        
-                                    </Typography>
-                                </Box> */}
-                                {/* <YearlyBreakup  /> */}
-                            </>
+                        serverData.data && (
+                            <Box mt={2}>
+                            <Typography variant='h4' mb={2}>
+                                Income  عاید
+                            </Typography>
+                            <CustomTable data={serverData.data} />
+                        </Box>
                         )
                     }
 

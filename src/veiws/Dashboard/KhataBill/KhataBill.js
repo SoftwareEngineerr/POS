@@ -4,11 +4,12 @@ import ShowKhata from '../../../components/suggestionInput/showKhata'
 import { useDispatch, useSelector } from 'react-redux';
 import { ShowLoader } from '../../../redux/actions/loader';
 import axios from 'axios';
-import { Grid, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
 import CustomTable from '../../../components/table/SimpleTable';
 import ShowKhataPerson from './component/ShowKhataPerson';
 import PaginationTable from '../../../components/table/paginationTable';
 import Receipt from '../../../components/pdf/pdf';
+import POSBill from '../../../components/pdf/pdf';
 
 const KhataBill = props => {
     const [suggestions , setSuggestions] = useState();
@@ -24,6 +25,10 @@ const KhataBill = props => {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const [ serverData , setServerData ] = useState()
+
+    const [update , setUpdate] = useState(0);
+    const [payOpen, setPayOpen] = useState(false);
+
 
 
 
@@ -125,19 +130,95 @@ const KhataBill = props => {
       const total = items.reduce((sum, item) => sum + item.price, 0);
     
 
-      const showData = (param) => {
-        alert(param)
+      const showData = async(param) => {
+        setPayOpen(true)
+        dispatch(ShowLoader('1'))
+        
+            try {
+                const response = await axios.post(api.track_Bill_Id ,{bill_id: param} , {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`,
+                    },
+                });
+    
+                if (response.status === 200) {
+                  // setServerData(response.data.result);
+                  if(response.data.result != []){
+                      setServerData((prevValues) => ({
+                          ...prevValues,
+                          pdfBill: response.data,
+                      }));
+                  }
+              dispatch(ShowLoader('0'))
+
+                }
+                else{
+                  console.log(response)
+                  //   dispatch(SHOW_MODAL(response.data.message , response.response))
+
+                }
+            } catch (error) {
+                dispatch(ShowLoader('0'))
+                console.log(error.response.data.message);
+              //   dispatch(SHOW_MODAL(error.response.data.message, 'nothing'))
+
+
+            }
+        // alert(param)
       }
     
+      const payOpenclose = () => {
+        setPayOpen(false)
+    }
+    const closepaymodal = () => {
+        setPayOpen(false)
+        setUpdate((update)=>update+1)
+    }
   return (
     <div>
       {
-        data && (
-          <div>
-            {/* <Receipt items={items} total={total} /> */}
-              {/* <Receipt items={items} total={total} customerName="John Doe" /> */}
-          </div>
-        )
+        // data && (
+        //   <div>
+        //     {/* <Receipt items={items} total={total} /> */}
+        //       {/* <Receipt items={items} total={total} customerName="John Doe" /> */}
+        //   </div>
+        // )
+      }
+
+      {
+        serverData?.pdfBill ?
+        <Dialog
+            open={payOpen}
+            onClose={payOpenclose}
+            aria-labelledby="responsive-dialog-title"
+            className='dialogCustomSize'
+            
+            >
+                <DialogTitle id="responsive-dialog-title" >
+                    Receipt 
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        <Box 
+                        sx={{
+                            minWidth: '400px',
+                            minHeight: '448px'
+                        }}
+                        >
+                            <Receipt data={serverData.pdfBill} />
+                        </Box>
+
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={payOpenclose}>
+                    Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        :
+        null
       }
         <Grid container>
             <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -183,6 +264,8 @@ const KhataBill = props => {
                             </>
                         )
                     }
+
+                {/* <POSBill billData={billData} /> */}
             </Grid>
         </Grid>
 

@@ -84,32 +84,56 @@ const Expense = (props) => {
             ...prevValues,
             [name]:  `${converterToDate.getFullYear()}-${converterToDate.getMonth() + 1}-${converterToDate.getDate()}`
     }));
-    fetchData(e,name)
+    }
+    const submitFunc = (e) => {
+        e.preventDefault()
+        fetchData()
     }
       
     // Table Data Ended
   return (
-    <PageContainer title='Donation' description='Donation'>
+    <PageContainer title='Expense' description='Donation'>
         <form onSubmit={submitForm}>
-            <CustomForm  data={data.inputs} handleInputChange={handleInputChange } />
-            <Box mt={2}>
-                <CustomBtn mt={2} data={data.btn.data}  style={data.btn.style} />
-            </Box>
+            <Grid container>
+                <CustomForm  data={data.inputs} handleInputChange={handleInputChange } />
+                <Grid item lg={7} md={7} sm={12} xs={12}>
+                    <Box mt={2}>
+                        <CustomBtn mt={2} data={data.btn.data}  style={data.btn.style} />
+                    </Box>
+                </Grid>
+
+            </Grid>
         </form>
 
 
         <Box mt={3}>
                     <Grid container>
-                        <CustomForm data={data.Date}  ChangeDate={ChangeDate}  />            
+                        <CustomForm data={data.Date}  ChangeDate={ChangeDate}  />  
+                        {
+                            inputValues.FromDate && inputValues.ToDate ? (
+                                <Grid item lg={7} md={7} sm={12} xs={12}>
+                                    <Box mt={2}>
+                                        <form onSubmit={submitFunc}>
+                                            <CustomBtn data="Show Expense"  style={data.btn.style} />
+                                        </form>
+                                    </Box>
+                                </Grid>
+                            )
+                            :
+                            null
+                        }          
                     </Grid>
-                    {
-                        serverData && serverData.veiwDonation && serverData.veiwDonation.length !== 0 && (
-                            <>
-                                {/* <CustomForm data={serverData.veiwDonation} handleInputChange={handleInputChange} /> */}
-                                <CustomTable data={serverData.veiwDonation} />
-                            </>
-                        )
-                    }
+                    <Box mt={3}>
+                        {
+                            serverData && serverData.veiwDonation && serverData.veiwDonation.length !== 0 && (
+                                <>
+                                    {/* <CustomForm data={serverData.veiwDonation} handleInputChange={handleInputChange} /> */}
+                                    <CustomTable data={serverData.veiwDonation} />
+                                </>
+                            )
+                        }
+
+                    </Box>
 
 
         </Box>

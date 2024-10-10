@@ -6,7 +6,7 @@ import { IconAperture, IconCopy, IconLayoutDashboard,  IconLogin, IconMoodHappy,
 import TechRegistration from "../veiws/Dashboard/authentication/TeacherReg/registration";
 import CustomizeRolls from "../veiws/Dashboard/CustomizeRolls/CustomizeRolls";
 import Expense from "../veiws/Dashboard/Expense/Expense/Expense";
-import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject } from "@mui/icons-material";
+import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject, Inventory2Outlined, PersonAddAlt, ProductionQuantityLimits, AttachMoneyOutlined, KeyboardReturnOutlined, HowToReg, HowToRegOutlined, WorkspacePremiumOutlined } from "@mui/icons-material";
 import Donation from "../veiws/Dashboard/Expense/Donation/Donation";
 import Income from "../veiws/Dashboard/Expense/Income/Income";
 import Result from "../veiws/Website/Result/Result";
@@ -88,7 +88,7 @@ export const RouteHeader = () => {
                     item: true,
                     id: uniqueId(),
                     title: <div><span>Inventory </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
-                    icon: AppRegistration,
+                    icon: Inventory2Outlined,
                     href: '/Private/Inventory',
                     path: '/Private/Inventory',
                     element: <div id="Inventory"><Inventory /></div>
@@ -103,7 +103,7 @@ export const RouteHeader = () => {
                       item: true,
                       id: uniqueId(),
                       title: <div><span>Khata </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
-                      icon: AppRegistration,
+                      icon: PersonAddAlt,
                       href: '/Private/Khata',
                       path: '/Private/Khata',
                       element: <div id="Khata"><Khata /></div>
@@ -118,7 +118,7 @@ export const RouteHeader = () => {
                         item: true,
                         id: uniqueId(),
                         title: <div><span>Product Available </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
-                        icon: AppRegistration,
+                        icon: ProductionQuantityLimits,
                         href: '/Private/Product_Available',
                         path: '/Private/Product_Available',
                         element: <div id="Khata"><ProductAvailable /></div>
@@ -133,7 +133,7 @@ export const RouteHeader = () => {
                           item: true,
                           id: uniqueId(),
                           title: <div><span>Khata Bill </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
-                          icon: AppRegistration,
+                          icon: AttachMoneyOutlined,
                           href: '/Private/Khata_Bill',
                           path: '/Private/Khata_Bill',
                           element: <div id="Khata"><KhataBill /></div>
@@ -148,13 +148,28 @@ export const RouteHeader = () => {
                             item: true,
                             id: uniqueId(),
                             title: <div><span>Return Product </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
-                            icon: AppRegistration,
+                            icon: KeyboardReturnOutlined,
                             href: '/Private/Return_Product',
                             path: '/Private/Return_Product',
                             element: <div id="Khata"><ReturnProduct /></div>
                           },
                         ]
                         ),
+                        ...( getRolse.Khata_Bill != 1
+                          ? []
+                          :
+                          [
+                            {
+                              item: true,
+                              id: uniqueId(),
+                              title: <div><span>Employee Registration</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                              icon: HowToRegOutlined,
+                              href: '/Private/Employee/Registration',
+                              path: '/Private/Employee/Registration',
+                              element: <div id="Khata"><TechRegistration /></div>
+                            },
+                          ]
+                          ),
 
                     
                   
@@ -178,7 +193,7 @@ export const RouteHeader = () => {
                 item: true,
                 id: uniqueId(),
                 title: <div><span>Authorities </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}>    </Typography></div>,
-                icon: Api,
+                icon: WorkspacePremiumOutlined,
                 href: '/Private/Auth/Role',
                 path: '/Private/Auth/Role',
                 element: <div id="CustomizeRolls"><CustomizeRolls /></div>
@@ -207,18 +222,18 @@ export const RouteHeader = () => {
                     path: '/Private/Expense/Expense',
                     element: <div id="Expense"><Expense /></div>
                     }]),
-                    ...( getRolse.Donation != 1
-                      ? []
-                      :
-                      [{
-                      item: true,
-                      id: uniqueId(),
-                      title: <div><span>Donation </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> بسپنه</Typography></div>,
-                      icon: Bloodtype,
-                      href: '/Private/Expense/Donation',
-                      path: '/Private/Expense/Donation',
-                      element: <div id="Donation"><Donation /></div>
-                      }]),
+                    // ...( getRolse.Donation != 1
+                    //   ? []
+                    //   :
+                    //   [{
+                    //   item: true,
+                    //   id: uniqueId(),
+                    //   title: <div><span>Donation </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> بسپنه</Typography></div>,
+                    //   icon: Bloodtype,
+                    //   href: '/Private/Expense/Donation',
+                    //   path: '/Private/Expense/Donation',
+                    //   element: <div id="Donation"><Donation /></div>
+                    //   }]),
                       ...( getRolse.Income != 1
                         ? []
                         :

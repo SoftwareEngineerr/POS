@@ -278,13 +278,12 @@ export default function CalculatorTable(props) {
     
 
 
-    const submitFunc = (e) => {
+    const submitFunc = async(e) => {
         e.preventDefault();
         const data = obj.map((item , ind)=>{
             return { ...item , PerPice: props.data[ind].Sell_Price}
         })
-        console.log(data)
-        dispatch(POS(data))
+         dispatch(POS(data))
         const payload = {
             data: data,
             khataId: props.khataId,
@@ -293,10 +292,9 @@ export default function CalculatorTable(props) {
             items: data.length,
             pay: inputValues.pay
         }
-        console.log(props.khataId)
-        dispatch(PostRequest(api.create_Bill , userToken , payload))
-        props.open()
-        props.updateinfo()
+        await dispatch(PostRequest(api.create_Bill , userToken , payload))
+        await props.open()
+        await props.updateinfo()
     }
     const minusMoney = (value, ind) => {
         console.log(value, ind);

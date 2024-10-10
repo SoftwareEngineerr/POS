@@ -30,10 +30,8 @@ const ReturnProduct = (props) => {
             [e.target.name]: e.target.value,
         }));
     }
-    const submitfunc = (e) => {
-        e.preventDefault()
-
-            const userToken = JSON.parse(sessionStorage.getItem('User_Data'))?.token || undefined;
+    const trackBill = () => {
+      const userToken = JSON.parse(sessionStorage.getItem('User_Data'))?.token || undefined;
             try {
               dispatch(ShowLoader('1'))
               axios.post(`${api.track_Bill_Id}`, inputValues, {
@@ -63,6 +61,10 @@ const ReturnProduct = (props) => {
               dispatch(ShowLoader('0'))
 
             }
+    }
+    const submitfunc = (e) => {
+        e.preventDefault()
+        trackBill();
         console.log(inputValues)
     }
   return (
@@ -90,7 +92,7 @@ const ReturnProduct = (props) => {
                         list && 
                             list[0] ? (
                             <Box mt={2}>
-                            <HistoryCalculatorTable data={list} realdata={realdata} bill_id={inputValues.bill_id} />
+                            <HistoryCalculatorTable data={list} realdata={realdata} bill_id={inputValues.bill_id} update={trackBill} />
                             </Box>
                         )
                         :
