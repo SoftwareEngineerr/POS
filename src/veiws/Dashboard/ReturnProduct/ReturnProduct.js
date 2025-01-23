@@ -22,6 +22,7 @@ const ReturnProduct = (props) => {
     const dispatch = useDispatch();
     const api = useSelector((state)=>state.Api)
     const [ list , setList ] = useState()
+    const [update , setUpdate ] = useState(0)
 
     function handleInputChange(e) {
         console.log(inputValues )
@@ -45,6 +46,7 @@ const ReturnProduct = (props) => {
                   console.log(res.data.productresults)
                   setRealdata(res.data.productresults)
                   setList(res.data.fakedata)
+                  setUpdate((data)=>data+1)
                   dispatch(ShowLoader('0'))
                 }
                 else{
@@ -92,7 +94,7 @@ const ReturnProduct = (props) => {
                         list && 
                             list[0] ? (
                             <Box mt={2}>
-                            <HistoryCalculatorTable data={list} realdata={realdata} bill_id={inputValues.bill_id} update={trackBill} />
+                            <HistoryCalculatorTable updateData={update} data={list} realdata={realdata} bill_id={inputValues.bill_id} update={trackBill} />
                             </Box>
                         )
                         :

@@ -84,6 +84,7 @@ const ShowKhataPerson = props => {
                             khataId={props.id}
                             open={()=>setOpen(false)}
                             updateinfo={props.updateinfo}
+                            pay="true"
                             //  myfunc={updateinfo}
                               />
                         </Box>

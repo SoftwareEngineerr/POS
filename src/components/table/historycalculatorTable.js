@@ -38,6 +38,7 @@ export default function HistoryCalculatorTable(props) {
       return rest; // Return the rest of the properties
     })
   );
+  
 
   const priceChecker = (item) => {
     //console.log(item)
@@ -141,21 +142,23 @@ export default function HistoryCalculatorTable(props) {
         const { Sell_Price  ,  ...rest } = item; // Destructure to omit Quantity
         console.log(item , obj)
         if(obj){
-            if(obj[ind] != undefined){
-                if(item.id == obj[ind].id){
-                    return obj[ind]
-                }
-            }
-            else{
-                return {...rest , price:myfunc()}; // Return the rest of the properties
-            }
+            // if(obj[ind] != undefined){
+            //     if(item.id == obj[ind].id){
+            //         return obj[ind]
+            //     }
+            // }
+            // else{
+                return {
+                  ...rest , price:myfunc()
+                }; // Return the rest of the properties
+            // }
         }
         else{
             return {...rest , price:myfunc()}; // Return the rest of the properties
         }
       }));
       totalfunc()
-    }, [props.data ]);
+    }, [props.data , props.updateData ]);
 
     useEffect(()=>{
   //console.log(props.updateQuantity)
@@ -216,7 +219,7 @@ export default function HistoryCalculatorTable(props) {
 
         }
 
-    },[props.update])
+    },[props.update ,  props.updateData])
   
   
   const [inputValues, setInputValues] = useState({});
@@ -246,7 +249,7 @@ export default function HistoryCalculatorTable(props) {
                   return item; // Return the item as is for all other indices
                 });
               });
-              
+              console.log(ind)
             obj[ind].Return =  props.data[ind].Quantity -  e.target.value 
             // props.data[ind].defaultQuatity = e.target.value
         }
@@ -259,6 +262,8 @@ export default function HistoryCalculatorTable(props) {
 
             obj[ind].price = e.target.value * props.data[ind].Sell_Price
             obj[ind].Quantity = max
+            obj[ind].Return =  props.data[ind].Quantity -  e.target.value 
+
 
             // props.data[ind].defaultQuatity = max
 
@@ -443,7 +448,7 @@ export default function HistoryCalculatorTable(props) {
               
                   <TableCell>
              {/* { row.Return} */}
-             { props.data[ind].Quantity }
+             {/* { props.data[ind].Quantity } */}
                     {
                   //console.log(row)
                     }

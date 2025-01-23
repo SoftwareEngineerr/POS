@@ -131,7 +131,6 @@ const KhataBill = props => {
     
 
       const showData = async(param) => {
-        setPayOpen(true)
         dispatch(ShowLoader('1'))
         
             try {
@@ -165,6 +164,7 @@ const KhataBill = props => {
 
 
             }
+            setPayOpen(true)
         // alert(param)
       }
     

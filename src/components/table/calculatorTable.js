@@ -295,6 +295,11 @@ export default function CalculatorTable(props) {
         await dispatch(PostRequest(api.create_Bill , userToken , payload))
         await props.open()
         await props.updateinfo()
+        setData('')
+        setObj('')
+        props.data.length = 0;
+        props = { ...props, data: [] };
+
     }
     const minusMoney = (value, ind) => {
         console.log(value, ind);

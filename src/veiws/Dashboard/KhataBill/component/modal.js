@@ -107,8 +107,39 @@ const Modal = (props) => {
     const updateData = (params) => {
         setData(params)
     }
+  
+    const [scannedValue, setScannedValue] = useState('');
+  
+  // Store scanned characters temporarily
+  let tempScan = '';
+
+  const handleScan = (event) => {
+    // If the event is a single character, append it to tempScan
+    if (event.key.length === 1) {
+      tempScan += event.key;
+    }
+
+    // If the Enter key is pressed, process the scanned value
+    if (event.key === 'Enter') {
+      setScannedValue(tempScan); // Save the complete scanned value
+      // console.log()
+      let id = suggestions?.filter((item)=>item.BarCode == tempScan);
+      console.log(suggestions?.filter((item , ind)=>item.BarCode == tempScan))
+      fetchData(id.id)
+      console.log('Scanned Value:', tempScan);
+      tempScan = ''; // Reset for the next scan
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleScan);
+    return () => {
+      window.removeEventListener('keydown', handleScan);
+    };
+  }, []);
   return (
     <div>
+        {/* <p>{scannedValue ? `Scanned Value: ${scannedValue}` : 'No value scanned yet.'}</p> */}
         <Grid container>
             <Grid lg={12} md={12} sm={12} xs={12}>
                 <ShowProduct 
@@ -123,7 +154,7 @@ const Modal = (props) => {
                 {
                     data != [] && data != undefined && data && data.length !== 0 && (
                         // console.log(data)
-                        <CalculatorTable Discount="true" pay="true" updateinfo={props.updateinfo} open={props.open} khataId={props.khataId} data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
+                        <CalculatorTable Discount="true" pay={props.pay} updateinfo={props.updateinfo} open={props.open} khataId={props.khataId} data={data} updateData={updateData} updateQuantity={updateQuantity} update={update} />
                     )
                 }
             </Grid>

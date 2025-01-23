@@ -6,7 +6,7 @@ import { IconAperture, IconCopy, IconLayoutDashboard,  IconLogin, IconMoodHappy,
 import TechRegistration from "../veiws/Dashboard/authentication/TeacherReg/registration";
 import CustomizeRolls from "../veiws/Dashboard/CustomizeRolls/CustomizeRolls";
 import Expense from "../veiws/Dashboard/Expense/Expense/Expense";
-import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject, Inventory2Outlined, PersonAddAlt, ProductionQuantityLimits, AttachMoneyOutlined, KeyboardReturnOutlined, HowToReg, HowToRegOutlined, WorkspacePremiumOutlined } from "@mui/icons-material";
+import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject, Inventory2Outlined, PersonAddAlt, ProductionQuantityLimits, AttachMoneyOutlined, KeyboardReturnOutlined, HowToReg, HowToRegOutlined, WorkspacePremiumOutlined, GpsFixedOutlined, PaymentOutlined } from "@mui/icons-material";
 import Donation from "../veiws/Dashboard/Expense/Donation/Donation";
 import Income from "../veiws/Dashboard/Expense/Income/Income";
 import Result from "../veiws/Website/Result/Result";
@@ -23,6 +23,7 @@ import Khata from "../veiws/Dashboard/Khata";
 import ProductAvailable from "../veiws/Dashboard/Product_Availablity";
 import KhataBill from "../veiws/Dashboard/KhataBill/KhataBill";
 import ReturnProduct from "../veiws/Dashboard/ReturnProduct/ReturnProduct";
+import Cash from "../veiws/Dashboard/Cash/Cash";
 
 // console.log(SelectedData())
 export const RouteHeader = () => {
@@ -170,7 +171,36 @@ export const RouteHeader = () => {
                             },
                           ]
                           ),
-
+                          ...( getRolse.Khata_Bill != 1
+                            ? []
+                            :
+                            [
+                              {
+                                item: true,
+                                id: uniqueId(),
+                                title: <div><span>Cash Bill</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                                icon: PaymentOutlined,
+                                href: '/Private/Cash_bill',
+                                path: '/Private/Cash_bill',
+                                element: <div id="Khata"><Cash /></div>
+                              },
+                            ]
+                            ),
+                            ...( getRolse.Khata_Bill != 1
+                              ? []
+                              :
+                              [
+                                {
+                                  item: true,
+                                  id: uniqueId(),
+                                  title: <div><span>Track Bill</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                                  icon: GpsFixedOutlined,
+                                  href: '/Private/Track_Bill',
+                                  path: '/Private/Track_Bill',
+                                  element: <div id="Khata"><TechRegistration /></div>
+                                },
+                              ]
+                              ),
                     
                   
             
@@ -198,6 +228,7 @@ export const RouteHeader = () => {
                 path: '/Private/Auth/Role',
                 element: <div id="CustomizeRolls"><CustomizeRolls /></div>
               }]),
+              
     
                   ...( getRolse.Expense == 1 || getRolse.Donation == 1 || getRolse.Income == 1
                     ? 
