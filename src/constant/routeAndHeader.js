@@ -6,7 +6,7 @@ import { IconAperture, IconCopy, IconLayoutDashboard,  IconLogin, IconMoodHappy,
 import TechRegistration from "../veiws/Dashboard/authentication/TeacherReg/registration";
 import CustomizeRolls from "../veiws/Dashboard/CustomizeRolls/CustomizeRolls";
 import Expense from "../veiws/Dashboard/Expense/Expense/Expense";
-import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject, Inventory2Outlined, PersonAddAlt, ProductionQuantityLimits, AttachMoneyOutlined, KeyboardReturnOutlined, HowToReg, HowToRegOutlined, WorkspacePremiumOutlined, GpsFixedOutlined, PaymentOutlined } from "@mui/icons-material";
+import { AddCard, Api, AddAlert, AppRegistration, Assessment, Bloodtype, InstallMobile, CallSplit, DataSaverOn, Dialpad, GradeOutlined, VerifiedUserRounded, StickyNote2Rounded, FlightClassOutlined, Games, Subject, Inventory2Outlined, PersonAddAlt, ProductionQuantityLimits, AttachMoneyOutlined, KeyboardReturnOutlined, HowToReg, HowToRegOutlined, WorkspacePremiumOutlined, GpsFixedOutlined, PaymentOutlined, PaymentsRounded, DetailsTwoTone, WebStoriesOutlined } from "@mui/icons-material";
 import Donation from "../veiws/Dashboard/Expense/Donation/Donation";
 import Income from "../veiws/Dashboard/Expense/Income/Income";
 import Result from "../veiws/Website/Result/Result";
@@ -201,6 +201,51 @@ export const RouteHeader = () => {
                                 },
                               ]
                               ),
+                              ...( getRolse.Khata_Bill != 1
+                                ? []
+                                :
+                                [
+                                  {
+                                    item: true,
+                                    id: uniqueId(),
+                                    title: <div><span>Website Order</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                                    icon: WebStoriesOutlined,
+                                    href: '/Private/Track_Bill',
+                                    path: '/Private/Track_Bill',
+                                    element: <div id="Khata"><TechRegistration /></div>
+                                  },
+                                ]
+                                ),
+                                ...( getRolse.Khata_Bill != 1
+                                  ? []
+                                  :
+                                  [
+                                    {
+                                      item: true,
+                                      id: uniqueId(),
+                                      title: <div><span>Website detail </span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                                      icon: DetailsTwoTone,
+                                      href: '/Private/Track_Bill',
+                                      path: '/Private/Track_Bill',
+                                      element: <div id="Khata"><TechRegistration /></div>
+                                    },
+                                  ]
+                                  ),
+                                  ...( getRolse.Khata_Bill != 1
+                                    ? []
+                                    :
+                                    [
+                                      {
+                                        item: true,
+                                        id: uniqueId(),
+                                        title: <div><span>Payment Methods</span><Typography variant="span" sx={{fontSize: '16px',marginLeft: '7px',display: (theme)=>theme.palette.sidemenutext.display.display, display: 'inline'}}> </Typography></div>,
+                                        icon: PaymentsRounded,
+                                        href: '/Private/Track_Bill',
+                                        path: '/Private/Track_Bill',
+                                        element: <div id="Khata"><TechRegistration /></div>
+                                      },
+                                    ]
+                                    ),
                     
                   
             
